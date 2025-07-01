@@ -2,6 +2,7 @@
 
 After You need to add @ in tsconfig.json and vite.config.ts
 
+=> tsconfig.json
 ```
 "compilerOptions": {
     "baseUrl": ".",
@@ -11,6 +12,7 @@ After You need to add @ in tsconfig.json and vite.config.ts
   }
 ```
 
+=> vite.config.ts
 ```
 resolve: {
     alias: {
@@ -33,7 +35,7 @@ components.json should be as follows
   },
 ```
 
-=> You need to check theapp/app.css (@import "tailwindcss"; @import "tw-animate-css";)
+=> You need to check the app/app.css (@import "tailwindcss"; @import "tw-animate-css";)
 => You need to check the package.json ("@types/node": "^20") if there is not @types/node in package.json file and you run `bun add -D @types/node `
 
 ex: `npx shadcn@latest add button` => after use button
