@@ -21,8 +21,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
+import { useSignUpMutation } from "@/hooks/useSignUpMutation";
+import { toast } from "sonner";
+import type { AxiosError } from "axios";
 
-type SignUpFormType = z.infer<typeof signUpSchema>;
+export type SignUpFormType = z.infer<typeof signUpSchema>;
 const SignUp = () => {
   const form = useForm<SignUpFormType>({
     resolver: zodResolver(signUpSchema),
@@ -34,8 +37,23 @@ const SignUp = () => {
     },
   });
 
+  const {mutate, isPending} = useSignUpMutation();
+
   const handleOnSubmit = (values: SignUpFormType) => {
     console.log(values);
+    // Here you can handle the sign-up logic, e.g., call an API to register
+    mutate(values, {
+      onSuccess: () => {
+        console.log("User registered successfully");
+        toast.success("User registered successfully");
+      },
+      onError: (error) => {
+        const err: AxiosError = error as AxiosError;
+        console.error("Error registering user", err);
+        toast.error("Error registering user: " + err.response?.data || "Unknown error");
+      },
+    });
+    form.reset();
   };
 
   return (

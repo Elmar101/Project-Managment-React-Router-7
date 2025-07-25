@@ -6,6 +6,8 @@ import mongoose from "mongoose";
 import morgan from "morgan";
 import type { NextFunction, Request, Response } from "express";
 
+import routes from "./routes/index";
+
 dotenv.config();
 
 const app = express();
@@ -20,7 +22,7 @@ app.use(morgan("dev"));
 // Connect to MongoDB
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.DB_URL || "",);
+        await mongoose.connect(process.env.DB_URL || "");
         console.log("MongoDB connected successfully");
     } catch (error) {
         console.error("MongoDB connection error:", error);
@@ -37,6 +39,8 @@ app.get("/", async (req, res) => {
         message: "Welcome to the API",
     });
 });
+
+app.use("/api-v1", routes);
 
 //Error handling middleware
 interface ErrorWithStack extends Error {

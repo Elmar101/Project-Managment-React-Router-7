@@ -1,5 +1,7 @@
 import { Navigate } from 'react-router';
 import type { Route } from '../+types/root';
+import { use } from 'react';
+import { useAuth } from '@/provider/AuthContext';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -7,9 +9,10 @@ export function meta({}: Route.MetaArgs) {
     { name: "description", content: "Welcome to TaskHub!" },
   ];
 }
-const isLogined = false; // Replace with actual authentication logic
+
 const MainPage = () => {
-  return !isLogined ? <Navigate to="/auth/sign-in" /> : <Navigate to="/pages/home" />;
+  const {isAuthenticated} = useAuth();
+  return !isAuthenticated ? <Navigate to="/auth/sign-in" /> : <Navigate to="/pages/home" />;
 }
 
 export default MainPage
