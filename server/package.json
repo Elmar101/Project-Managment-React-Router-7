@@ -17,6 +17,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@sendgrid/mail": "^8.1.5",
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.19",
     "@types/jsonwebtoken": "^9.0.10",
